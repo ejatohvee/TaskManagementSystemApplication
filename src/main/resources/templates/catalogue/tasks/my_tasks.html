@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My tasks</title>
+</head>
+<body>
+<table>
+    <tr style="font-weight: bold">
+        <td>Title</td>
+        <td>Description</td>
+        <td>Status</td>
+        <td>Priority</td>
+        <td>Performer</td>
+        <td>Comments</td>
+    </tr>
+
+    <tr th:each="task: ${tasks}">
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.status}"></td>
+        <td th:text="${task.priority}"></td>
+        <td th:text="${task.performer}"></td>
+        <td>
+            <ul th:each="comment : ${task.comments}">
+                <li th:text="${comment.body}"></li>
+                <li th:text="${comment.time}"></li>
+                <li th:text="${comment.author}"></li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{'/catalogue/tasks/' + ${task.id} + '/edit'}">Edit task</a>
+        </td>
+        <td>
+            <form method="post" th:action="@{'/catalogue/tasks/' + ${task.id} + '/delete'}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
