@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks List</title>
+</head>
+<body>
+<p>All Tasks</p>
+<table>
+    <tr style="font-weight: bold">
+        <td>Title</td>
+        <td>Description</td>
+        <td>Status</td>
+        <td>Priority</td>
+        <td>Author</td>
+        <td>Performer</td>
+        <td>Comments</td>
+    </tr>
+
+    <tr th:each="task: ${tasks}">
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.status}"></td>
+        <td th:text="${task.priority}"></td>
+        <td th:text="${task.author}"></td>
+        <td th:text="${task.performer}"></td>
+        <td>
+            <ul th:each="comment : ${task.comments}">
+                <li th:text="${comment.body}"></li>
+                <li th:text="${comment.time}"></li>
+                <li th:text="${comment.author}"></li>
+                <!--                    <a href="@{}"-->
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{'/comment/' + ${task.id}}">Add comment</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/catalogue/tasks/create}">Create task</a>
+<a th:href="@{/catalogue/tasks/my_tasks}">My tasks</a>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add comment</title>
+</head>
+<body>
+    <h1>Add new comment</h1>
+    <form method="post" th:action="@{'/comment/' + ${taskId}}">
+        <label>Comment
+            <input type="text" name="body">
+        </label>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
