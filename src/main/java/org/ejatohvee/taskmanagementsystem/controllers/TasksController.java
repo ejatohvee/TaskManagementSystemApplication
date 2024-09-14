@@ -2,61 +2,36 @@ package org.ejatohvee.taskmanagementsystem.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
 import org.ejatohvee.taskmanagementsystem.payloads.NewTaskPayload;
 import org.ejatohvee.taskmanagementsystem.services.TaskService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("catalogue/tasks")
 public class TasksController {
     private final TaskService taskService;
 
     @GetMapping("list")
-    public String getTasksList(Model model) {
-        model.addAttribute("tasks", taskService.getAllTasks());
-        return "catalogue/tasks/list";
+    public ResponseEntity<?> getTasksList() {
+        return ResponseEntity.ok(taskService.getAllTasks());
     }
 
     @GetMapping("my_tasks")
-    public String getUsersTasks(Model model) {
-//        String currentUsername = authentication.getName();
-        String username = "user";
-        List<Task> tasks = taskService.getTasksByUsername(username);
-        model.addAttribute("tasks", tasks);
-        return "catalogue/tasks/my_tasks";
-    }
-
-    @GetMapping("create")
-    public String createTask() {
-        return "catalogue/tasks/create";
+    public ResponseEntity<?> getUsersTasks() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return ResponseEntity.ok(taskService.getTasksByUsername(username));
     }
 
     @PostMapping("create")
-    public String createTask(@Valid NewTaskPayload payload, BindingResult bindingResult, Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUserEmail = authentication.getName();
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("payload", payload);
-            model.addAttribute("errors", bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).toList());
-            return "catalogue/tasks/create";
-        } else {
-            taskService.createTask(payload.title(), payload.description(), payload.status(), payload.priority(), "user", payload.performer());
-            return "redirect:/catalogue/tasks/list";
-        }
+    public ResponseEntity<?> createTask(@Valid @RequestBody NewTaskPayload payload) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        return ResponseEntity.ok(taskService.createTask(payload.title(), payload.description(), payload.status(), payload.priority(), currentUsername, payload.performer()));
     }
 }
-
-// TODO Payload validation
-// TODO correct usernames in methods

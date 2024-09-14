@@ -2,8 +2,8 @@ package org.ejatohvee.taskmanagementsystem.payloads;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.ejatohvee.taskmanagementsystem.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.TaskStatus;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
 
 public record UpdateTaskPayload(
         @NotNull(message = "{catalogue.tasks.update.errors.title.not_null}")

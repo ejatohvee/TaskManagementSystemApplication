@@ -1,14 +1,13 @@
 package org.ejatohvee.taskmanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.ejatohvee.taskmanagementsystem.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.TaskStatus;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
 
-import javax.annotation.processing.Generated;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +43,7 @@ public class Task {
     public String performer;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     public List<Comment> comments;
 
     public Task(String title, String description, TaskStatus status, TaskPriority priority, String author, String performer) {

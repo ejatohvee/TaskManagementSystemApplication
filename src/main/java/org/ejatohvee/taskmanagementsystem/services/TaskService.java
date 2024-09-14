@@ -1,7 +1,7 @@
 package org.ejatohvee.taskmanagementsystem.services;
 
-import org.ejatohvee.taskmanagementsystem.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.TaskStatus;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
 import org.ejatohvee.taskmanagementsystem.entities.Task;
 
 import java.util.List;
@@ -18,5 +18,7 @@ public interface TaskService {
 
     void updateTask(UUID id, String title, String description, TaskStatus status, TaskPriority priority, String performer);
 
-    void deleteTask(UUID id);
+    boolean deleteTask(UUID id);
+
+    String getTaskAuthorUsername(UUID id);
 }

@@ -1,5 +1,6 @@
 package org.ejatohvee.taskmanagementsystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
+    @JsonBackReference
     public Task task;
 
     public Comment(String body, String author, Task task) {
