@@ -1,8 +1,8 @@
 package org.ejatohvee.taskmanagementsystem.services;
 
 import lombok.AllArgsConstructor;
-import org.ejatohvee.taskmanagementsystem.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.TaskStatus;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
 import org.ejatohvee.taskmanagementsystem.entities.Task;
 import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -56,8 +56,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(UUID id) {
-        taskRepository.deleteById(id);
+    public boolean deleteTask(UUID id) {
+        if (taskRepository.findById(id).isPresent()) {
+            taskRepository.deleteById(id);
+            return true;
+        } else return false;
     }
+
+    @Override
+    public String getTaskAuthorUsername(UUID id) {
+        return taskRepository.findById(id).map(
+                Task::getAuthor).orElse(null);
+    }
+
 
 }
