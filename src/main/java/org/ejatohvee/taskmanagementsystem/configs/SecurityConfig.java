@@ -1,4 +1,4 @@
-package org.ejatohvee.taskmanagementsystem.Configs;
+package org.ejatohvee.taskmanagementsystem.configs;
 
 import lombok.RequiredArgsConstructor;
 import org.ejatohvee.taskmanagementsystem.security.JwtRequestFilter;
