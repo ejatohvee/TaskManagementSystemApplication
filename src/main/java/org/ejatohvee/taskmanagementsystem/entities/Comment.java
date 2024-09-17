@@ -2,15 +2,14 @@ package org.ejatohvee.taskmanagementsystem.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(schema = "tasks_list", name = "t_comment")
@@ -21,18 +20,18 @@ public class Comment {
     private UUID id;
 
     @Column(name = "c_body")
-    public String body;
+    private String body;
 
     @Column(name = "c_author")
-    public String author;
+    private String author;
 
     @Column(name = "c_time")
-    public String time;
+    private String time;
 
     @ManyToOne
     @JoinColumn(name = "task_id", nullable = false)
     @JsonBackReference
-    public Task task;
+    private Task task;
 
     public Comment(String body, String author, Task task) {
         this.body = body;

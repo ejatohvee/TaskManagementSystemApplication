@@ -1,15 +1,14 @@
 package org.ejatohvee.taskmanagementsystem.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "t_users", schema = "users_management")
 @NoArgsConstructor
 @AllArgsConstructor

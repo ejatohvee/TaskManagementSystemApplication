@@ -1,17 +1,19 @@
 package org.ejatohvee.taskmanagementsystem.services;
 
 import lombok.AllArgsConstructor;
+import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
 import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
 import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
 import org.ejatohvee.taskmanagementsystem.entities.Task;
+import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
 import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -19,26 +21,29 @@ import java.util.UUID;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
     @Override
-    public Iterable<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public Iterable<TaskDTO> getAllTasks() {
+        Iterable<Task> tasks = taskRepository.findAll();
+        return StreamSupport.stream(tasks.spliterator(), false).map(taskMapper::taskToTaskDto).toList();
     }
 
     @Override
-    public List<Task> getTasksByUsername(String username) {
-        return taskRepository.getTasksByAuthor(username);
+    public List<TaskDTO> getTasksByUsername(String username) {
+        return taskRepository.getTasksByAuthor(username).stream().map(taskMapper::taskToTaskDto).toList();
     }
 
     @Override
-    public Optional<Task> findTask(UUID id) {
-        return taskRepository.findById(id);
+    public TaskDTO findTask(UUID id) {
+        Task task = taskRepository.findById(id).orElseThrow();
+        return taskMapper.taskToTaskDto(task);
     }
 
     @Override
     @Transactional
-    public Task createTask(String title, String description, TaskStatus status, TaskPriority priority, String author, String performer) {
-        return taskRepository.save(new Task(title, description, status, priority, author, performer));
+    public TaskDTO createTask(String title, String description, TaskStatus status, TaskPriority priority, String author, String performer) {
+        return taskMapper.taskToTaskDto(taskRepository.save(new Task(title, description, status, priority, author, performer)));
     }
 
     @Override
@@ -68,6 +73,5 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findById(id).map(
                 Task::getAuthor).orElse(null);
     }
-
 
 }

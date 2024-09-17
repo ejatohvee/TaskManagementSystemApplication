@@ -1,11 +1,10 @@
 package org.ejatohvee.taskmanagementsystem.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "t_authorities", schema = "users_management")
 @NoArgsConstructor
