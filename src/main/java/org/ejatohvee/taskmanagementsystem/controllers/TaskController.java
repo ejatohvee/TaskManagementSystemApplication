@@ -43,22 +43,22 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
-    @GetMapping("{taskId}")
-    public ResponseEntity<TaskDTO> getTask(@PathVariable("taskId") UUID taskId) {
+    @GetMapping("{id}")
+    public ResponseEntity<TaskDTO> getTask(@PathVariable("id") UUID taskId) {
         TaskDTO task = taskService.findTask(taskId);
         return ResponseEntity.ok(task);
     }
 
-    @PutMapping("{taskId}")
+    @PutMapping("{id}")
     @PreAuthorize("authentication.name == @taskServiceImpl.getTaskAuthorUsername(#taskId)")
-    public ResponseEntity<Void> updateTask(@PathVariable("taskId") UUID taskId, @Valid @RequestBody UpdateTaskPayload payload) {
+    public ResponseEntity<Void> updateTask(@PathVariable("id") UUID taskId, @Valid @RequestBody UpdateTaskPayload payload) {
         taskService.updateTask(taskId, payload.title(), payload.description(), payload.status(), payload.priority(), payload.performer());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{taskId}")
+    @DeleteMapping("{id}")
     @PreAuthorize("authentication.name == @taskServiceImpl.getTaskAuthorUsername(#taskId)")
-    public ResponseEntity<Void> deleteTask(@PathVariable("taskId") UUID taskId) {
+    public ResponseEntity<Void> deleteTask(@PathVariable("id") UUID taskId) {
         if (taskService.deleteTask(taskId)) {
             return ResponseEntity.noContent().build();
         } else return ResponseEntity.notFound().build();

@@ -30,6 +30,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void createComment(String body, String author, TaskDTO taskDTO) {
         commentRepository.save(new Comment(body, author, taskMapper.taskDtoToTask(taskDTO)));
     }
@@ -45,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO findComment(UUID id) {
-        Comment comment = commentRepository.findById(id).orElseThrow();
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No comment for such id found"));
         return commentMapper.commentToCommentDto(comment);
     }
 
