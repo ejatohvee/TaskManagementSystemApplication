@@ -18,8 +18,8 @@ import java.util.UUID;
 public class CommentController {
     private final TaskService taskService;
     private final CommentService commentService;
-    @GetMapping("{commentId}")
-    public ResponseEntity<CommentDTO> getComment(@PathVariable("commentId") UUID commentId) {
+    @GetMapping("{id}")
+    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") UUID commentId) {
         return ResponseEntity.ok(commentService.findComment(commentId));
     }
 
@@ -30,14 +30,14 @@ public class CommentController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("{commentId}")
-    public ResponseEntity<Void> updateComment(@PathVariable("commentId") UUID commentId, @RequestBody CommentPayload payload) {
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateComment(@PathVariable("id") UUID commentId, @RequestBody CommentPayload payload) {
         commentService.updateComment(commentId, payload.body());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable("commentId") UUID commentId) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteComment(@PathVariable("id") UUID commentId) {
         if (commentService.deleteComment(commentId)) {
             return ResponseEntity.noContent().build();
         } else return ResponseEntity.notFound().build();
