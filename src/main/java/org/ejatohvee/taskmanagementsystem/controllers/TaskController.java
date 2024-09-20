@@ -19,7 +19,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @EnableMethodSecurity
-@RequestMapping("catalogue/tasks")
+@RequestMapping("tasks")
 public class TaskController {
     private final TaskService taskService;
 
@@ -43,22 +43,22 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<TaskDTO> getTask(@PathVariable("id") UUID taskId) {
+    @GetMapping("{taskId}")
+    public ResponseEntity<TaskDTO> getTask(@PathVariable("taskId") UUID taskId) {
         TaskDTO task = taskService.findTask(taskId);
         return ResponseEntity.ok(task);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{taskId}")
     @PreAuthorize("authentication.name == @taskServiceImpl.getTaskAuthorUsername(#taskId)")
-    public ResponseEntity<Void> updateTask(@PathVariable("id") UUID taskId, @Valid @RequestBody UpdateTaskPayload payload) {
+    public ResponseEntity<Void> updateTask(@PathVariable("taskId") UUID taskId, @Valid @RequestBody UpdateTaskPayload payload) {
         taskService.updateTask(taskId, payload.title(), payload.description(), payload.status(), payload.priority(), payload.performer());
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{taskId}")
     @PreAuthorize("authentication.name == @taskServiceImpl.getTaskAuthorUsername(#taskId)")
-    public ResponseEntity<Void> deleteTask(@PathVariable("id") UUID taskId) {
+    public ResponseEntity<Void> deleteTask(@PathVariable("taskId") UUID taskId) {
         if (taskService.deleteTask(taskId)) {
             return ResponseEntity.noContent().build();
         } else return ResponseEntity.notFound().build();
