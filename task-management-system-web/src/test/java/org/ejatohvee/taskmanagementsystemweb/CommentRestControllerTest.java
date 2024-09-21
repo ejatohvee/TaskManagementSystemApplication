@@ -1,9 +1,9 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-import org.ejatohvee.taskmanagementsystem.controllers.CommentController;
-import org.ejatohvee.taskmanagementsystem.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Comment;
-import org.ejatohvee.taskmanagementsystem.services.CommentService;
+import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Comment;
+import org.ejatohvee.taskmanagementsystemservice.services.CommentService;
+import org.ejatohvee.taskmanagementsystemweb.controllers.CommentController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ public class CommentRestControllerTest {
         UUID id = UUID.randomUUID();
         Comment mockComment = new Comment("Sample body", "author", null);
         mockComment.setId(id);
-        CommentDTO commentDTO = new CommentDTO(mockComment.getBody(), mockComment.getAuthor(), mockComment.getTime());
+        CommentDTO commentDTO = new CommentDTO(id, mockComment.getBody(), mockComment.getAuthor(), mockComment.getTime());
 
         when(commentService.findComment(mockComment.getId())).thenReturn(commentDTO);
 

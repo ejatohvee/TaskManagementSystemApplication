@@ -3,7 +3,6 @@ package org.ejatohvee.taskmanagementsystemservice.services;
 
 
 import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
 
 import java.util.UUID;
 

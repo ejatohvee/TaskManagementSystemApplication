@@ -1,11 +1,11 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-import org.ejatohvee.taskmanagementsystem.entities.Comment;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
-import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
-import org.ejatohvee.taskmanagementsystem.repositories.CommentRepository;
-import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
+import org.ejatohvee.taskmanagementsystemcore.entities.Comment;
+import org.ejatohvee.taskmanagementsystemcore.entities.Task;
+import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskStatus;
+import org.ejatohvee.taskmanagementsystemcore.repositories.CommentRepository;
+import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -44,7 +44,7 @@ public class CommentRestControllerIT {
         commentRepository.save(comment);
 
 
-        mockMvc.perform(get("/comment/" + comment.getId())).andExpectAll(
+        mockMvc.perform(get("/comments/" + comment.getId())).andExpectAll(
                 status().isOk(),
                 content().contentType(MediaType.APPLICATION_JSON),
                 content().json("""
@@ -61,7 +61,7 @@ public class CommentRestControllerIT {
     void handleGetComment_ReturnsErrorResponseEntity() throws Exception {
         UUID id = UUID.randomUUID();
 
-        mockMvc.perform(get("/comment/" + id)).andExpectAll(
+        mockMvc.perform(get("/comments/" + id)).andExpectAll(
                 status().is(400),
                 content().string("Not found: No comment for such id found")
         );
@@ -92,6 +92,6 @@ public class CommentRestControllerIT {
         commentRepository.save(comment);
 
 
-        mockMvc.perform(delete("/comment/" + comment.getId())).andExpect(status().isNoContent());
+        mockMvc.perform(delete("/comments/" + comment.getId())).andExpect(status().isNoContent());
     }
 }

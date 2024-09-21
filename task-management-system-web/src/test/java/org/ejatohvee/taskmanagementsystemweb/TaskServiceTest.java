@@ -1,10 +1,10 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
-import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
-import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
-import org.ejatohvee.taskmanagementsystem.services.TaskServiceImpl;
+import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Task;
+import org.ejatohvee.taskmanagementsystemcore.mapper.TaskMapper;
+import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
+import org.ejatohvee.taskmanagementsystemservice.services.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -32,14 +33,20 @@ public class TaskServiceTest {
         String usernameOne = "Maxim";
         String usernameTwo = "Ejatohvee";
         Task taskOne = new Task();
+        UUID taskOneId = UUID.randomUUID();
+        taskOne.setId(taskOneId);
         taskOne.setTitle("First task");
         taskOne.setAuthor(usernameOne);
 
         Task taskTwo = new Task();
+        UUID taskTwoId = UUID.randomUUID();
+        taskTwo.setId(taskTwoId);
         taskTwo.setTitle("Second task");
         taskTwo.setAuthor(usernameTwo);
 
         Task taskThree = new Task();
+        UUID taskThreeId = UUID.randomUUID();
+        taskThree.setId(taskThreeId);
         taskThree.setTitle("Third task");
         taskThree.setAuthor(usernameOne);
 
@@ -47,8 +54,8 @@ public class TaskServiceTest {
         List<Task> userOneTasks = List.of(taskOne, taskThree);
         when(taskRepository.getTasksByAuthor(usernameOne)).thenReturn(userOneTasks);
 
-        TaskDTO taskDTOOne = new TaskDTO(taskOne.getTitle(), null, null, null, usernameOne, null, null);
-        TaskDTO taskDTOThree = new TaskDTO(taskThree.getTitle(), null, null, null, usernameOne, null, null);
+        TaskDTO taskDTOOne = new TaskDTO(taskOneId, taskOne.getTitle(), null, null, null, usernameOne, null, null);
+        TaskDTO taskDTOThree = new TaskDTO(taskThreeId, taskThree.getTitle(), null, null, null, usernameOne, null, null);
 
         when(taskMapper.taskToTaskDto(taskOne)).thenReturn(taskDTOOne);
         when(taskMapper.taskToTaskDto(taskThree)).thenReturn(taskDTOThree);
