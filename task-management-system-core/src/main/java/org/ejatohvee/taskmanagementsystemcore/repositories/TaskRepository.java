@@ -12,6 +12,4 @@ public interface TaskRepository extends CrudRepository<Task, UUID> {
     Task getTaskById(UUID id);
 
     List<Task> getTasksByAuthor(String author);
-
-    Iterable<Task> findAll();
 }

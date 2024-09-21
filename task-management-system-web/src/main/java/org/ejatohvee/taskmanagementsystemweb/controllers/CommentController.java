@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
 import org.ejatohvee.taskmanagementsystemcore.payloads.CommentPayload;
 import org.ejatohvee.taskmanagementsystemservice.services.CommentService;
-import org.ejatohvee.taskmanagementsystemservice.services.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

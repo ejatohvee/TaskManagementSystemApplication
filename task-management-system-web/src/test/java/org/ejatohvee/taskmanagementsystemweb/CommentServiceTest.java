@@ -1,10 +1,10 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-import org.ejatohvee.taskmanagementsystem.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Comment;
-import org.ejatohvee.taskmanagementsystem.mapper.CommentMapper;
-import org.ejatohvee.taskmanagementsystem.repositories.CommentRepository;
-import org.ejatohvee.taskmanagementsystem.services.CommentServiceImpl;
+import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Comment;
+import org.ejatohvee.taskmanagementsystemcore.mapper.CommentMapper;
+import org.ejatohvee.taskmanagementsystemcore.repositories.CommentRepository;
+import org.ejatohvee.taskmanagementsystemservice.services.CommentServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ public class CommentServiceTest {
 
         when(commentRepository.findById(id)).thenReturn(Optional.of(mockComment));
 
-        CommentDTO commentDTO = new CommentDTO(mockComment.getBody(), mockComment.getAuthor(), "22:10");
+        CommentDTO commentDTO = new CommentDTO(id, mockComment.getBody(), mockComment.getAuthor(), "22:10");
         when(commentMapper.commentToCommentDto(mockComment)).thenReturn(commentDTO);
 
         CommentDTO result = commentService.findComment(id);

@@ -44,5 +44,3 @@ create table users_management.user_authority(
     id_user uuid not null references users_management.t_users (id),
     constraint uk_user_authority unique (id_authority, id_user)
 );
-
-alter table users_management.t_users add column c_email varchar not null
