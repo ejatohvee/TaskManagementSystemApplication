@@ -1,13 +1,13 @@
-package org.ejatohvee.taskmanagementsystemweb;
+package org.ejatohvee.taskmanagementsystem;
 
 
-import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
-import org.ejatohvee.taskmanagementsystemcore.entities.Task;
-import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskPriority;
-import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskStatus;
-import org.ejatohvee.taskmanagementsystemcore.payloads.NewTaskPayload;
-import org.ejatohvee.taskmanagementsystemservice.services.TaskService;
-import org.ejatohvee.taskmanagementsystemweb.controllers.TaskController;
+import org.ejatohvee.taskmanagementsystem.controllers.TaskController;
+import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
+import org.ejatohvee.taskmanagementsystem.entities.Task;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
+import org.ejatohvee.taskmanagementsystem.payloads.NewTaskPayload;
+import org.ejatohvee.taskmanagementsystem.services.TaskService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,7 +35,6 @@ public class TaskRestControllerTest {
     void handleAddTask_ReturnsAllTasks() {
         UUID id = UUID.randomUUID();
         Task task = new Task("Title", "Description", TaskStatus.IN_PROCESS, TaskPriority.MIDDLE, "Ejatohvee", "Ejatohvee");
-        task.setId(id);
         TaskDTO taskDTO = new TaskDTO(id, task.getTitle(), task.getDescription(), task.getStatus(), task.getPriority(), task.getAuthor(), task.getPerformer(), null);
         NewTaskPayload taskPayload = new NewTaskPayload("Title", "Description", TaskStatus.IN_PROCESS, TaskPriority.MIDDLE, "Ejatohvee");
 

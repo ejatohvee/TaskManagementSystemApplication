@@ -47,13 +47,14 @@ public class CommentRestControllerIT {
         mockMvc.perform(get("/comments/" + comment.getId())).andExpectAll(
                 status().isOk(),
                 content().contentType(MediaType.APPLICATION_JSON),
-                content().json("""
+                content().json(String.format("""
                             {
+                            "id": "%s",
                               "body": "New body",
                               "author": "Ejatohvee",
                               "time": "10:00"
                             }
-                        """)
+                        """, comment.getId()))
         );
     }
 
@@ -67,20 +68,20 @@ public class CommentRestControllerIT {
         );
     }
 
-//    @Test
-//    void handleCreateComment_ReturnsOk() throws Exception {
-//        Task task = new Task("Tasks title", "Description", TaskStatus.IN_PROCESS, TaskPriority.MIDDLE, "Ejatohvee", "Maksim");
-//        task = taskRepository.save(task);
-//
-//        String json = """
-//                {
-//                "body": "New body"
-//                }
-//                """;
-//
-//        mockMvc.perform(post("/comment/" + task.getId()).contentType(MediaType.APPLICATION_JSON)
-//                .content(json)).andExpect(status().isOk());
-//    }
+    @Test
+    void handleCreateComment_ReturnsOk() throws Exception {
+        Task task = new Task("Tasks title", "Description", TaskStatus.IN_PROCESS, TaskPriority.MIDDLE, "Ejatohvee", "Maksim");
+        task = taskRepository.save(task);
+
+        String json = """
+                {
+                "body": "New body"
+                }
+                """;
+
+        mockMvc.perform(post("/comments/" + task.getId()).contentType(MediaType.APPLICATION_JSON)
+                .content(json)).andExpect(status().isNoContent());
+    }
 
     @Test
     void handleDeleteComment_ReturnsOk() throws Exception {
