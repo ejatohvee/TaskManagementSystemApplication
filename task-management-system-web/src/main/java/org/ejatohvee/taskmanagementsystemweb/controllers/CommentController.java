@@ -1,9 +1,9 @@
-package org.ejatohvee.taskmanagementsystem.controllers;
+package org.ejatohvee.taskmanagementsystemweb.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.ejatohvee.taskmanagementsystem.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystem.payloads.CommentPayload;
-import org.ejatohvee.taskmanagementsystem.services.CommentService;
+import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
+import org.ejatohvee.taskmanagementsystemcore.payloads.CommentPayload;
+import org.ejatohvee.taskmanagementsystemservice.services.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

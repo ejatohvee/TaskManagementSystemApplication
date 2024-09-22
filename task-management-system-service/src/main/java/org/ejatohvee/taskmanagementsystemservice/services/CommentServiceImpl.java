@@ -1,13 +1,13 @@
-package org.ejatohvee.taskmanagementsystem.services;
+package org.ejatohvee.taskmanagementsystemservice.services;
 
 import lombok.AllArgsConstructor;
-import org.ejatohvee.taskmanagementsystem.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Comment;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
-import org.ejatohvee.taskmanagementsystem.mapper.CommentMapper;
-import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
-import org.ejatohvee.taskmanagementsystem.repositories.CommentRepository;
-import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
+import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Comment;
+import org.ejatohvee.taskmanagementsystemcore.entities.Task;
+import org.ejatohvee.taskmanagementsystemcore.mapper.CommentMapper;
+import org.ejatohvee.taskmanagementsystemcore.repositories.CommentRepository;
+import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +17,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
+@ComponentScan("org.ejatohvee.taskmanagementsystemcore")
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final TaskRepository taskRepository;
