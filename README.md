@@ -1,4 +1,4 @@
-# TaskManagementSystemApplication
+# Task Management System Application
 **Project stack:** Spring Boot, Hibernate, Flyway, PostgreSQL, Spring Security, JWT, JUnit 5, Mockito, Jakarta Bean Validation, Docker
 
 ## Инструкция по запуску
