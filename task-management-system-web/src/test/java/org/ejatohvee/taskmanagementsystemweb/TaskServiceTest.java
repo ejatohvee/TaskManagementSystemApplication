@@ -1,10 +1,10 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
-import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
-import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
-import org.ejatohvee.taskmanagementsystem.services.TaskServiceImpl;
+import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Task;
+import org.ejatohvee.taskmanagementsystemcore.mapper.TaskMapper;
+import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
+import org.ejatohvee.taskmanagementsystemservice.services.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

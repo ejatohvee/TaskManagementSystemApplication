@@ -1,13 +1,12 @@
-package org.ejatohvee.taskmanagementsystem;
+package org.ejatohvee.taskmanagementsystemweb;
 
-
-import org.ejatohvee.taskmanagementsystem.controllers.TaskController;
-import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
-import org.ejatohvee.taskmanagementsystem.entities.Task;
-import org.ejatohvee.taskmanagementsystem.entities.enums.TaskPriority;
-import org.ejatohvee.taskmanagementsystem.entities.enums.TaskStatus;
-import org.ejatohvee.taskmanagementsystem.payloads.NewTaskPayload;
-import org.ejatohvee.taskmanagementsystem.services.TaskService;
+import org.ejatohvee.taskmanagementsystemweb.controllers.TaskController;
+import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
+import org.ejatohvee.taskmanagementsystemcore.entities.Task;
+import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskPriority;
+import org.ejatohvee.taskmanagementsystemcore.entities.enums.TaskStatus;
+import org.ejatohvee.taskmanagementsystemcore.payloads.NewTaskPayload;
+import org.ejatohvee.taskmanagementsystemservice.services.TaskService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
