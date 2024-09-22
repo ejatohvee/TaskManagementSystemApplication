@@ -12,7 +12,7 @@ Cистема управления задачами (Task Management System). О
 API позволяет получать задачи конкретного автора или исполнителя, а также все комментарии к ним. 
 
 ## Техническая часть
-В проекте используется Spring Boot, работа с базами данных реализована через Flyway, Hibernate, PostgreSQL. Авторизация через access JWT и использование refresh JWT для обновления (хранится в Cookie). Проект тестируется через JUnit 5 и Mockito. Используется валидация сущностей через Jakarta Bean Validation.
+В проекте используется Spring Boot, работа с базами данных реализована через Flyway, Hibernate, PostgreSQL. Авторизация через access JWT и использование refresh JWT для обновления (хранится в Cookie). Проект тестируется через JUnit 5 и Mockito. Используется валидация сущностей через Jakarta Bean Validation, маппинг с использованием MapStruct.
 
 
 <img width="737" alt="Screenshot 2024-09-22 at 20 57 07" src="https://github.com/user-attachments/assets/2976ebeb-6891-4fe8-9081-003638c42daa">
