@@ -3,7 +3,7 @@
 
 ## Инструкция по запуску
 Из папки с проектом запустить:
-'docker-compose build && docker-compose up'
+`docker-compose build && docker-compose up`
 
 С документацией можно ознакомится здесь: http://localhost:8080/swagger-ui/index.html
 
