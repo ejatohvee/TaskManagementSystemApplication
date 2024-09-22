@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: ejatohvee/task-management-system
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: username
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_SECRET: sdfklsflks12435klknk77qlkjdf098jk
+      JWT_ACCESS_LIFETIME: 30m
+      JWT_REFRESH_LIFETIME: 1440m
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: username
+        POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"

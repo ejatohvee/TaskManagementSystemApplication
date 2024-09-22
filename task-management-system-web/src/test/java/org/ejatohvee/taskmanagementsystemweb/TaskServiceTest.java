@@ -1,10 +1,10 @@
-package org.ejatohvee.taskmanagementsystemweb;
+package org.ejatohvee.taskmanagementsystem;
 
-import org.ejatohvee.taskmanagementsystemcore.dtos.TaskDTO;
-import org.ejatohvee.taskmanagementsystemcore.entities.Task;
-import org.ejatohvee.taskmanagementsystemcore.mapper.TaskMapper;
-import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
-import org.ejatohvee.taskmanagementsystemservice.services.TaskServiceImpl;
+import org.ejatohvee.taskmanagementsystem.dtos.TaskDTO;
+import org.ejatohvee.taskmanagementsystem.entities.Task;
+import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
+import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
+import org.ejatohvee.taskmanagementsystem.services.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,19 +34,15 @@ public class TaskServiceTest {
         String usernameTwo = "Ejatohvee";
         Task taskOne = new Task();
         UUID taskOneId = UUID.randomUUID();
-        taskOne.setId(taskOneId);
         taskOne.setTitle("First task");
         taskOne.setAuthor(usernameOne);
 
         Task taskTwo = new Task();
-        UUID taskTwoId = UUID.randomUUID();
-        taskTwo.setId(taskTwoId);
         taskTwo.setTitle("Second task");
         taskTwo.setAuthor(usernameTwo);
 
         Task taskThree = new Task();
         UUID taskThreeId = UUID.randomUUID();
-        taskThree.setId(taskThreeId);
         taskThree.setTitle("Third task");
         taskThree.setAuthor(usernameOne);
 

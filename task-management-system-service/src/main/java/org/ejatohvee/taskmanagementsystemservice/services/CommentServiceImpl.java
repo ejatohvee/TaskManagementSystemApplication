@@ -1,15 +1,15 @@
-package org.ejatohvee.taskmanagementsystemservice.services;
+package org.ejatohvee.taskmanagementsystem.services;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.ejatohvee.taskmanagementsystemcore.dtos.CommentDTO;
-import org.ejatohvee.taskmanagementsystemcore.entities.Comment;
-import org.ejatohvee.taskmanagementsystemcore.entities.Task;
-import org.ejatohvee.taskmanagementsystemcore.mapper.CommentMapper;
-import org.ejatohvee.taskmanagementsystemcore.repositories.CommentRepository;
-import org.ejatohvee.taskmanagementsystemcore.repositories.TaskRepository;
-import org.springframework.context.annotation.ComponentScan;
+import org.ejatohvee.taskmanagementsystem.dtos.CommentDTO;
+import org.ejatohvee.taskmanagementsystem.entities.Comment;
+import org.ejatohvee.taskmanagementsystem.entities.Task;
+import org.ejatohvee.taskmanagementsystem.mapper.CommentMapper;
+import org.ejatohvee.taskmanagementsystem.mapper.TaskMapper;
+import org.ejatohvee.taskmanagementsystem.repositories.CommentRepository;
+import org.ejatohvee.taskmanagementsystem.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -17,7 +17,6 @@ import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
-@ComponentScan(basePackages = "org.ejatohvee.taskmanagementsystemcore")
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final TaskRepository taskRepository;
@@ -33,8 +32,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void createComment(String body, String author, UUID taskId) {
-        Task task = taskRepository.getTaskById(taskId);
+    public void createComment(String body, String author, UUID id) {
+        Task task = taskRepository.getTaskById(id);
         commentRepository.save(new Comment(body, author, task));
     }
 
